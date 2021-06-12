@@ -1,0 +1,58 @@
+
+.header h5 a{
+
+    color: black;
+    text-decoration: none;
+}
+.cocktail{
+    justify-content: space-between;
+}
+.aboutClass{
+    text-align: justify;
+  }
+  .card{
+    width: 340px !important;
+  }
+  
+  .myTitle{ 
+      margin-top: 70px;
+      margin-bottom:50px;
+    letter-spacing: 10px;
+  }
+  .cocktailFooter{
+   
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    padding:35px 15px 35px 15px
+  }
+  
+  .cocktailFooter h6{
+  
+    letter-spacing: 5px;
+    font-weight: bold;
+  }
+  
+  .cocktailFooter button{
+   background: #476a2e;
+   padding: .25rem .4rem;
+   color:#fff;
+   letter-spacing: 5px;
+  
+  }
+  
+  .cocktailFooter button:hover{
+     background: #d4e6a5;
+    color:#fff;
+   
+   
+   }
+
+   .search h5{
+    display: flex;
+    padding: 0;
+    margin-bottom: 25px;
+    letter-spacing: 5px;
+    color:#476a2e;
+    font-weight: bold;
+   }
