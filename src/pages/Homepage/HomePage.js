@@ -1,17 +1,21 @@
-import { useCallback, useEffect, useReducer } from 'react'
+import { useCallback, useEffect,useState, useReducer } from 'react'
 import { CocktailsList } from '../../data/CocktailsList'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { getCocktails } from '../../services'
 import { debounce } from '../../helpers/debounce'
+import Loader from '../../components/loader'
+import EmptyData from '../../components/emptydata'
 
 const SET_COCKTAILS = 'SET_COCKTAILS'
 const SET_FILTER = 'SET_FILTER'
 const CLEAR_FILTER = 'CLEAR_FILTER'
 
+
 const initialState = {
   cocktails: [],
   oldcocktails: [],
   filters: null,
+  empty:false
 }
 
 const cocktailsReducer = (state, action) => {
@@ -26,7 +30,8 @@ const cocktailsReducer = (state, action) => {
       // eslint-disable-next-line
       const data = state.cocktails.filter((item) =>
         item.strGlass.toLowerCase().includes(action.payload.toLowerCase())
-      )
+      ) 
+      if(data.length===0){ state.empty=true}
       return {
         ...state,
         filter: action.payload,
@@ -37,7 +42,9 @@ const cocktailsReducer = (state, action) => {
         ...state,
         filter: null,
         cocktails: [...state.oldcocktails],
+        empty:false
       }
+      
     default:
       throw new Error('')
   }
@@ -46,48 +53,65 @@ const cocktailsReducer = (state, action) => {
 function Homepage() {
   const [state, dispatch] = useReducer(cocktailsReducer, initialState)
   const [, setcocktailsStorage] = useLocalStorage('app:cocktails', [])
+  const [loading, setLoading] = useState(true);
 
   const loadCocktails = useCallback(async () => {
     const cocktailslist = await getCocktails()
-    console.log(cocktailslist)
+    
     setcocktailsStorage(cocktailslist)
     dispatch({
       type: SET_COCKTAILS,
       payload: cocktailslist,
     })
+    
   }, [setcocktailsStorage])
 
-  useEffect(() => {
-    loadCocktails()
-  }, [])
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);  
+            loadCocktails()     
+        }, 1000);
+        return () => { clearTimeout(timer);} 
+    }, []);
 
-  useEffect(() => {
+    useEffect(() => {
+    
     setcocktailsStorage(state.cocktails)
-  }, [state.cocktails, setcocktailsStorage])
+   
+    }, [state.cocktails, setcocktailsStorage])
 
   const onSearch = debounce(({ target }) => {
     if (target.value.length > 3) {
-      dispatch({
-        type: SET_FILTER,
-        payload: target.value,
-      })
+        setLoading(true);
+        const timer = setTimeout(() => { 
+            dispatch({
+                type: SET_FILTER,
+                payload: target.value,
+              }); 
+
+             setLoading(false);
+           
+        }, 1000);
+        return () => { clearTimeout(timer);} 
     } else {
-      if (state.filter) {
+      if (state.filter) { 
+        
         dispatch({
           type: CLEAR_FILTER,
         })
       }
-    }
-  })
 
+    }
+   
+  })
   const rendercocktails = () => {
     return <CocktailsList data={state.cocktails} />
+    
   }
-
   return (
     <div className="container m-auto w-75 mt-5">
+      
       <div className="col-12 mb-4">
-
         <div className="col-12 shadow search p-5 row m-0">
             <h5> Search Your Favorite Cocktail </h5>
           <input
@@ -98,11 +122,16 @@ function Homepage() {
             onKeyUp={onSearch}
           />
         </div>
-
         <h3 className="myTitle display-6">Cocktails</h3>
-
+        
       </div>
-      <div className="col-12">{rendercocktails()}</div>
+      <div className="col-12">
+      { loading ? <Loader /> : rendercocktails()}
+      </div>
+      
+      <div className="col-12">
+      { (!loading && state.empty) ? <EmptyData/> : ''}
+      </div>
     </div>
   )
 }

@@ -32,6 +32,21 @@
     letter-spacing: 5px;
     font-weight: bold;
   }
+
+  .btn-details{
+    background: #476a2e;
+    padding: .25rem .4rem;
+    color:#fff;
+    letter-spacing: 5px;
+   
+   }
+
+   .btn-details:hover{
+    background: #d4e6a5;
+   color:#fff;
+  
+  
+  }
   
   .cocktailFooter button{
    background: #476a2e;
@@ -56,3 +71,186 @@
     color:#476a2e;
     font-weight: bold;
    }
+
+   .about{
+     margin-top:150px;
+   }
+   .details{
+     margin-bottom:30px;
+     margin-left:20px;
+   }
+
+   .details .dttitle{
+   
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 19px;
+    /* font-style: italic; */
+    text-decoration: underline;
+    text-align: left;
+    border-radius: 5px;
+    color: #476a2e;
+    width: 120px;
+    height: 40px;
+   }
+   .details .dtvalue{
+   
+    margin-left: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+   }
+   .detailshead{
+     text-align: right;
+   }
+
+.ring
+{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:150px;
+  height:150px;
+  background:transparent;
+  border:3px solid #3c3c3c;
+  border-radius:50%;
+  text-align:center;
+  line-height:150px;
+  font-family:sans-serif;
+  font-size:20px;
+  color:#fff000;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  text-shadow:0 0 10px #fff000;
+  box-shadow:0 0 20px rgba(0,0,0,.5);
+}
+.ring:before
+{
+  content:'';
+  position:absolute;
+  top:-3px;
+  left:-3px;
+  width:100%;
+  height:100%;
+  border:3px solid transparent;
+  border-top:3px solid #fff000;
+  border-right:3px solid #fff000;
+  border-radius:50%;
+  animation:animateC 2s linear infinite;
+}
+span
+{
+  display:block;
+  position:absolute;
+  top:calc(50% - 2px);
+  left:50%;
+  width:50%;
+  height:4px;
+  background:transparent;
+  transform-origin:left;
+  animation:animate 2s linear infinite;
+}
+span:before
+{
+  content:'';
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#fff000;
+  top:-6px;
+  right:-8px;
+  box-shadow:0 0 20px #fff000;
+}
+@keyframes animateC
+{
+  0%
+  {
+    transform:rotate(0deg);
+  }
+  100%
+  {
+    transform:rotate(360deg);
+  }
+}
+@keyframes animate
+{
+  0%
+  {
+    transform:rotate(45deg);
+  }
+  100%
+  {
+    transform:rotate(405deg);
+  }
+}
+
+
+.loader {
+    width: 150px;
+    height: 150px;
+}
+svg {
+    width: 90%;
+    fill: none;
+}
+.load {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 570;
+    stroke-width: 20px;
+}
+.load.one {
+    stroke: #476a2e;
+    animation: load 1.5s infinite;
+}
+.load.two {
+    stroke:#85b363;
+    animation: load 1.5s infinite;
+    animation-delay: 0.1s;
+}
+.load.three {
+    stroke: #d4e6a5;
+    animation: load 1.5s infinite;
+    animation-delay: 0.2s;
+}
+.point {
+    animation: bounce 1s infinite ease-in-out;
+}
+.point.one {
+    fill: #476a2e;
+    animation-delay: 0s;
+}
+.point.two {
+    fill: #85b363;
+    animation-delay: 0.1s;
+}
+.point.three {
+    fill: #d4e6a5;
+    animation-delay: 0.2s;
+}
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+   }
+    50% {
+        transform: translateY(-20px);
+   }
+}
+@keyframes load {
+    0% {
+        stroke-dashoffset: 570;
+   }
+    50% {
+        stroke-dashoffset: 530;
+   }
+    100% {
+        stroke-dashoffset: 570;
+        transform: rotate(360deg);
+   }
+}
+
+
+

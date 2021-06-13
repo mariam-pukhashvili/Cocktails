@@ -6,7 +6,7 @@ function Header(){
     
     <div className="row shadow white p-3 header">
         <div className=" d-flex m-auto w-75 align-items-center">
-            <div className="col-3"> <img src={'logo.svg'} />
+            <div className="col-3">  <Link to={route.HOME_PATH} ><img src={'/logo.svg'} alt="logo"/></Link>
             </div>
            <div className="col-1 offset-7">
                <h5>

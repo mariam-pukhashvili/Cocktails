@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import Homepage from './pages/homepage';
 import Header from './layouts/header';
 import { Routes } from './utils/routes';
 
